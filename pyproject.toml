@@ -1,0 +1,60 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ad-mcp-bridge-server"
+version = "1.0.0"
+description = "MCP Server for Odoo integration - enables AI assistants to interact with Odoo data"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [
+    { name = "AD", email = "admin@example.com" }
+]
+keywords = ["mcp", "odoo", "ai", "llm", "claude", "openai"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "mcp>=1.9.4",
+    "httpx>=0.25.0",
+    "pydantic>=2.0",
+    "pydantic-settings>=2.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+    "black>=23.0",
+    "ruff>=0.1.0",
+]
+
+[project.scripts]
+ad-mcp-bridge = "ad_mcp_bridge_server:main"
+
+[project.urls]
+Homepage = "https://github.com/example/ad-mcp-bridge-server"
+Documentation = "https://github.com/example/ad-mcp-bridge-server#readme"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ad_mcp_bridge_server"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
