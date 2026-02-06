@@ -7,16 +7,16 @@ name = "ad-mcp-bridge-server"
 version = "1.0.0"
 description = "MCP Server for Odoo integration - enables AI assistants to interact with Odoo data"
 readme = "README.md"
-license = "MIT"
+license = "Apache-2.0"
 requires-python = ">=3.10"
 authors = [
-    { name = "AD", email = "admin@example.com" }
+    { name = "Adil Akbar" }
 ]
 keywords = ["mcp", "odoo", "ai", "llm", "claude", "openai"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
+    "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",

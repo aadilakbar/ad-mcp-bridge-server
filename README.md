@@ -3,7 +3,9 @@
 [![MCP](https://img.shields.io/badge/MCP-Compatible-green)](https://modelcontextprotocol.io/)
 [![Odoo](https://img.shields.io/badge/Odoo-17.0%20%7C%2018.0%20%7C%2019.0-purple)](https://www.odoo.com/)
 [![Python](https://img.shields.io/badge/Python-3.10+-blue)](https://python.org/)
-[![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue)](LICENSE)
+
+> **Licensed under the Apache License, Version 2.0** - See [LICENSE](LICENSE) for details.
 
 A [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that enables AI assistants like **Claude** to interact with **Odoo** data using natural language.
 
@@ -73,21 +75,44 @@ Install the `ad_odoo_mcp_bridge` module in your Odoo instance:
 
 ### Environment Variables
 
-| Variable | Required | Default | Description |
-|----------|----------|---------|-------------|
-| `ODOO_URL` | ✅ | `http://localhost:8069` | Odoo server URL |
-| `ODOO_DB` | ✅ | - | Odoo database name |
-| `ODOO_API_KEY` | ✅ | - | API key from Odoo MCP Bridge |
-| `ODOO_USER` | ❌ | - | Username (alternative to API key) |
-| `ODOO_PASSWORD` | ❌ | - | Password (alternative to API key) |
-| `ODOO_MAX_RECORDS` | ❌ | `100` | Default max records per query |
-| `ODOO_TIMEOUT` | ❌ | `30` | Request timeout in seconds |
+The server requires the following environment variables:
+
+| Variable | Required | Description | Example |
+|----------|----------|-------------|---------|
+| `ODOO_URL` | Yes | Your Odoo instance URL | `https://mycompany.odoo.com` |
+| `ODOO_API_KEY` | Yes* | API key for authentication | `0ef5b399e9ee9c11b053dfb6eeba8de473c29fcd` |
+| `ODOO_USER` | Yes* | Username (if not using API key) | `admin` |
+| `ODOO_PASSWORD` | Yes* | Password (if not using API key) | `admin` |
+| `ODOO_DB` | No | Database name (auto-detected if not set) | `mycompany` |
+| `ODOO_MAX_RECORDS` | No | Default max records per query (default: `100`) | `200` |
+| `ODOO_TIMEOUT` | No | Request timeout in seconds (default: `30`) | `60` |
+| `ODOO_YOLO` | No | YOLO mode - bypasses MCP security (⚠️ DEV ONLY) | `off`, `read`, `true` |
+
+> **\* Authentication**: You must provide either `ODOO_API_KEY` **or** both `ODOO_USER` and `ODOO_PASSWORD`.
+
+#### MCP Transport Options
+
+| Variable | Required | Description | Example |
+|----------|----------|-------------|---------|
+| `MCP_TRANSPORT` | No | Transport type: `stdio` or `streamable-http` (default: `stdio`) | `streamable-http` |
+| `MCP_HOST` | No | Host for HTTP transport (default: `localhost`) | `0.0.0.0` |
+| `MCP_PORT` | No | Port for HTTP transport (default: `8000`) | `8080` |
+
+#### YOLO Mode Values
+
+| Value | Description |
+|-------|-------------|
+| `off` | All operations require explicit MCP Bridge permissions (default) |
+| `read` | Allows read-only operations on all models without configuration |
+| `true` | **⚠️ DANGEROUS** - Allows all operations including write/delete without restrictions |
+
+> **⚠️ Warning**: YOLO mode bypasses security checks and should **NEVER** be used in production. It's intended only for local development and testing.
 
 ### Create a `.env` File (Optional)
 
 ```env
-ODOO_URL=http://localhost:8069
-ODOO_DB=mydb
+ODOO_URL=https://mycompany.odoo.com
+ODOO_DB=mycompany
 ODOO_API_KEY=your-api-key-here
 ```
 
@@ -282,6 +307,30 @@ ad-mcp-bridge-server/
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+## ☕ Support
+
+Thank you for using this project! If you find it helpful and would like to support my work, kindly consider buying me a coffee. Your support is greatly appreciated!
+
+<a href="https://ko-fi.com/aadilakbar" target="_blank">
+  <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Buy Me a Coffee at ko-fi.com" />
+</a>
+
+And don't forget to give the project a ⭐ star if you like it!
+
+---
+
+## 📄 License
+
+This project is licensed under the **Apache License 2.0** - see the [LICENSE](LICENSE) file for details.
+
 ---
 
 ## 🙏 Acknowledgments
@@ -289,3 +338,11 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - [Anthropic](https://anthropic.com/) for Claude and MCP
 - [Odoo](https://odoo.com/) for the amazing ERP platform
 - [FastMCP](https://github.com/jlowin/fastmcp) for the Python MCP framework
+
+---
+
+## 📝 About
+
+A Model Context Protocol (MCP) server that enables AI assistants to securely interact with Odoo ERP systems through standardized resources and tools for data retrieval and manipulation.
+
+**Made with ❤️ for the Odoo and AI community**
